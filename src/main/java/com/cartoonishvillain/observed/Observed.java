@@ -1,5 +1,7 @@
 package com.cartoonishvillain.observed;
 
+import net.minecraft.client.model.EndermanModel;
+import net.minecraft.client.renderer.entity.EndermanRenderer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,6 +29,7 @@ public class Observed
 
     public Observed() {
         // Register the setup method for modloading
+        Register.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
