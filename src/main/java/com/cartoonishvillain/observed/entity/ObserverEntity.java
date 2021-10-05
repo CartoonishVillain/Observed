@@ -25,7 +25,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
 
     public static AttributeSupplier.Builder customAttributes(){
         return Mob.createMobAttributes()
-                .add(Attributes.KNOCKBACK_RESISTANCE, 20D).add(Attributes.MAX_HEALTH, 20D).add(Attributes.MOVEMENT_SPEED, 0.0d).add(Attributes.ARMOR, 5);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 20D).add(Attributes.MAX_HEALTH, 20D).add(Attributes.MOVEMENT_SPEED, 0.5d).add(Attributes.ARMOR, 5);
     }
 
     @Override
