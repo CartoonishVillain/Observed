@@ -1,5 +1,6 @@
-package com.cartoonishvillain.observed.entity;
+package com.cartoonishvillain.observed.entity.goals;
 
+import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.phys.Vec3;

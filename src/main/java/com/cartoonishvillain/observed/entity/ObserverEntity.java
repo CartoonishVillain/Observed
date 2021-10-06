@@ -1,6 +1,13 @@
 package com.cartoonishvillain.observed.entity;
 
+import com.cartoonishvillain.observed.Register;
+import com.cartoonishvillain.observed.capabilities.PlayerCapability;
+import com.cartoonishvillain.observed.entity.goals.NearestObservableGoal;
+import com.cartoonishvillain.observed.entity.goals.ObservationGoal;
+import com.cartoonishvillain.observed.entity.goals.ObserverMovementGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,6 +25,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class ObserverEntity extends Monster implements RangedAttackMob {
     public ObserverEntity(EntityType<? extends Monster> p_33002_, Level p_33003_) {
@@ -97,7 +105,43 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         lastLoc = null;
     }
 
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33034_) {
+        return Register.OBSERVERHURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return Register.OBSERVERDEATH.get();
+    }
+
     private void affectPlayer(Player player){
-        player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 10));
+        ArrayList<Player> players = (ArrayList<Player>) player.level.getEntitiesOfClass(Player.class, player.getBoundingBox().inflate(5));
+        players.remove(player);
+
+        float distance = this.distanceTo(player);
+        float effect;
+
+        if(distance <= 5){effect = 1;}
+        else if(distance <= 10){effect = 0.5f;}
+        else {effect = 0.25f;}
+
+        //TODO: IMMORTUOS CHECK
+
+        player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
+            h.changeObserveLevel(effect);
+        });
+
+        for (Player sideEffected : players){
+            //TODO: IMMORTUOS CHECK
+            sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
+                h.changeObserveLevel(effect/2f);
+            });
+        }
+
+        if(!player.level.isClientSide()){
+            player.level.playSound(null, getOnPos(), Register.OBSERVERATTACK.get(), SoundSource.HOSTILE, 1, 1);
+        }
+
     }
 }

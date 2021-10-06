@@ -1,4 +1,4 @@
-package com.cartoonishvillain.observed.entity;
+package com.cartoonishvillain.observed.entity.goals;
 
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;

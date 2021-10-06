@@ -1,4 +1,4 @@
-package com.cartoonishvillain.observed.entity;
+package com.cartoonishvillain.observed.entity.goals;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
