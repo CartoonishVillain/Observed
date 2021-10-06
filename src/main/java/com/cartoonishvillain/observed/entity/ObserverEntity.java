@@ -1,5 +1,7 @@
 package com.cartoonishvillain.observed.entity;
 
+import com.cartoonishvillain.ImmortuosCalyx.Infection.InfectionManagerCapability;
+import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.goals.NearestObservableGoal;
@@ -9,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ObserverEntity extends Monster implements RangedAttackMob {
     public ObserverEntity(EntityType<? extends Monster> p_33002_, Level p_33003_) {
@@ -46,9 +48,12 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 10f, 1.0D, 1.2D, this::avoid ));
         this.goalSelector.addGoal(2, new ObservationGoal(this, 1.25D, 20, 20));
         this.goalSelector.addGoal(3, new ObserverMovementGoal<>(this));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1));
         this.targetSelector.addGoal(1, new NearestObservableGoal(this, Player.class, 16, false, false, this::shouldAttack));
     }
 
@@ -126,17 +131,36 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         else if(distance <= 10){effect = 0.5f;}
         else {effect = 0.25f;}
 
-        //TODO: IMMORTUOS CHECK
+        boolean calyxCheck = Observed.isCalyxLoaded;
 
+        AtomicBoolean protectedByCalyx = new AtomicBoolean(false);
+
+        if(calyxCheck){
+            player.getCapability(InfectionManagerCapability.INSTANCE).ifPresent(h->{
+                if(h.getInfectionProgress() > 25){
+                    protectedByCalyx.set(true);
+                }
+            });
+        }
+
+        if(!protectedByCalyx.get()){
         player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
             h.changeObserveLevel(effect);
-        });
+        });}
 
+        protectedByCalyx.set(false);
         for (Player sideEffected : players){
-            //TODO: IMMORTUOS CHECK
-            sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
-                h.changeObserveLevel(effect/2f);
+            sideEffected.getCapability(InfectionManagerCapability.INSTANCE).ifPresent(h->{
+                if(h.getInfectionProgress() > 25){
+                    protectedByCalyx.set(true);
+                }
             });
+            if(!protectedByCalyx.get()) {
+                sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
+                    h.changeObserveLevel(effect / 2f);
+                });
+            }
+            protectedByCalyx.set(false);
         }
 
         if(!player.level.isClientSide()){

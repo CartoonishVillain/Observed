@@ -1,17 +1,21 @@
 package com.cartoonishvillain.observed.events;
 
+import com.cartoonishvillain.ImmortuosCalyx.Infection.InfectionManagerCapability;
 import com.cartoonishvillain.observed.ObserveEffect;
 import com.cartoonishvillain.observed.Observed;
+import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapabilityManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -69,6 +73,18 @@ public class ForgeBusEvents {
 
                 }
             });
+        }
+    }
+
+    @SubscribeEvent
+    public static void eatEyeball(LivingEntityUseItemEvent.Finish event){
+        if(!event.getEntityLiving().level.isClientSide() && event.getItem().getItem().equals(Register.OBSERVEREYE.get()) && Observed.isCalyxLoaded){
+            int rand = event.getEntityLiving().getRandom().nextInt(10);
+            if(rand == 5) {
+            event.getEntityLiving().getCapability(InfectionManagerCapability.INSTANCE).ifPresent(h->{
+                    h.setInfectionProgressIfLower(1);
+            });
+        }
         }
     }
 }

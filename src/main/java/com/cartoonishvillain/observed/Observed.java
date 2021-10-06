@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -25,6 +26,7 @@ public class Observed
 {
     // Directly reference a log4j logger.
     public static final String MODID = "observed";
+    public static boolean isCalyxLoaded;
     private static final Logger LOGGER = LogManager.getLogger();
 
     public Observed() {
@@ -37,8 +39,7 @@ public class Observed
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
-
+        isCalyxLoaded = ModList.get().isLoaded("immortuoscalyx");
     }
 
 }
