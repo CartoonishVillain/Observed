@@ -34,7 +34,15 @@ credits="Inspiration: Barotrauma" #optional
 authors="Cartoonish Villain" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-No description yet
+This mod adds in a single entity, the observer. They are passive creatures that are quite curious about the going ons of players.
+
+Unfortunately for players, that's all that is nice about them, with the ability to see players through walls this entity can have severe consequences to the health of those observed by them.
+
+The closer in proximity a player is, the faster they feel the negative effects, eventually leading to the player withering away if not dealt with quickly.
+
+Observers can be found quite easily while observing players with a quite notable static sound that they emit.
+
+When damaged they will panic, leave behind a pool of potent poison, and run away, so melee combat is generally not advised if avoidable.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.observed]] #optional

@@ -7,6 +7,7 @@ import com.cartoonishvillain.observed.capabilities.IPlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -26,6 +27,12 @@ public class ModBusEvents {
     public static void effect(final RegistryEvent.Register<MobEffect> event){
         ObserveEffect.init();
     }
+
+    @SubscribeEvent
+    public static void entityRegister(final RegistryEvent.Register<EntityType<?>> event){
+        Spawns.PlacementManager();
+    }
+
 
     @SubscribeEvent
     public static void CapabilityRegister(final RegisterCapabilitiesEvent event){
