@@ -6,13 +6,11 @@ import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapabilityManager;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -24,7 +22,7 @@ public class ForgeBusEvents {
 
     @SubscribeEvent
     public static void playerRegister(AttachCapabilitiesEvent<Entity> event){
-        if(event.getObject() instanceof Player) {
+        if(event.getObject() instanceof PlayerEntity) {
             PlayerCapabilityManager provider = new PlayerCapabilityManager();
             event.addCapability(new ResourceLocation(Observed.MODID, "observationlevels"), provider);
         }
@@ -44,31 +42,31 @@ public class ForgeBusEvents {
 
 
                 if(h.getObserveLevel() >= 10){
-                    event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 0));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 0));
                 }else if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 0){event.player.removeEffect(ObserveEffect.observed);}
 
 
                 if(h.getObserveLevel() >= 50){
-                    event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 1));
-                    event.player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 1000000, 0));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 1));
+                    event.player.addEffect(new EffectInstance(Effects.HUNGER, 1000000, 0));
                 }else{
-                    if(event.player.hasEffect(MobEffects.HUNGER) && event.player.getEffect(MobEffects.HUNGER).getDuration() > 12000){event.player.removeEffect(MobEffects.HUNGER);}
+                    if(event.player.hasEffect(Effects.HUNGER) && event.player.getEffect(Effects.HUNGER).getDuration() > 12000){event.player.removeEffect(Effects.HUNGER);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 1){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
                 if(h.getObserveLevel() >= 75){
-                    event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 2));
-                    event.player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1000000, 0));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 2));
+                    event.player.addEffect(new EffectInstance(Effects.WEAKNESS, 1000000, 0));
                 }else{
-                    if(event.player.hasEffect(MobEffects.WEAKNESS) && event.player.getEffect(MobEffects.WEAKNESS).getDuration() > 12000){event.player.removeEffect(MobEffects.WEAKNESS);}
+                    if(event.player.hasEffect(Effects.WEAKNESS) && event.player.getEffect(Effects.WEAKNESS).getDuration() > 12000){event.player.removeEffect(Effects.WEAKNESS);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 2){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
                 if (h.getObserveLevel() >= 90){
-                    event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 3));
-                    event.player.addEffect(new MobEffectInstance(MobEffects.WITHER, 1000000, 1));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 3));
+                    event.player.addEffect(new EffectInstance(Effects.WITHER, 1000000, 1));
                 } else{
-                    if(event.player.hasEffect(MobEffects.WITHER) && event.player.getEffect(MobEffects.WITHER).getDuration() > 12000){event.player.removeEffect(MobEffects.WITHER);}
+                    if(event.player.hasEffect(Effects.WITHER) && event.player.getEffect(Effects.WITHER).getDuration() > 12000){event.player.removeEffect(Effects.WITHER);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 3){event.player.removeEffect(ObserveEffect.observed);}
 
                 }

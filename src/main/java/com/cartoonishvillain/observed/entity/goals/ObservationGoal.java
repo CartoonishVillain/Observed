@@ -1,10 +1,11 @@
 package com.cartoonishvillain.observed.entity.goals;
 
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.ai.goal.RangedAttackGoal;
+
 
 public class ObservationGoal extends RangedAttackGoal {
-    public ObservationGoal(RangedAttackMob p_25768_, double p_25769_, int p_25770_, float p_25771_) {
+    public ObservationGoal(IRangedAttackMob p_25768_, double p_25769_, int p_25770_, float p_25771_) {
         super(p_25768_, p_25769_, p_25770_, p_25771_);
     }
 

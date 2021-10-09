@@ -1,9 +1,9 @@
 package com.cartoonishvillain.observed.entity.goals;
 
 import com.cartoonishvillain.observed.entity.ObserverEntity;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;
 
@@ -32,7 +32,7 @@ public class ObserverMovementGoal<T extends ObserverEntity> extends Goal {
     public void tick() {
         super.tick();
         if (!this.observer.isPathFinding()) {
-            Vec3 vector3d = DefaultRandomPos.getPosTowards(this.observer, 15, 4, Vec3.atBottomCenterOf(observer.getLastLoc()), (double)((float)Math.PI / 10F));
+            Vector3d vector3d = RandomPositionGenerator.getPosTowards(this.observer, 15, 4, Vector3d.atBottomCenterOf(observer.getLastLoc()), (double)((float)Math.PI / 10F));
             if (vector3d != null) {
                 this.observer.getNavigation().moveTo(vector3d.x, vector3d.y, vector3d.z, 1D);
             }

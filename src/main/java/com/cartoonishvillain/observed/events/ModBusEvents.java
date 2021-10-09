@@ -3,14 +3,9 @@ package com.cartoonishvillain.observed.events;
 import com.cartoonishvillain.observed.ObserveEffect;
 import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
-import com.cartoonishvillain.observed.capabilities.IPlayerCapability;
-import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraft.entity.EntityType;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +19,7 @@ public class ModBusEvents {
     }
 
     @SubscribeEvent
-    public static void effect(final RegistryEvent.Register<MobEffect> event){
+    public static void effect(final RegistryEvent.Register<Effect> event){
         ObserveEffect.init();
     }
 
@@ -34,10 +29,4 @@ public class ModBusEvents {
     }
 
 
-    @SubscribeEvent
-    public static void CapabilityRegister(final RegisterCapabilitiesEvent event){
-        event.register(IPlayerCapability.class);
-
-        PlayerCapability.INSTANCE = CapabilityManager.get(new CapabilityToken<IPlayerCapability>() {});
-    }
 }

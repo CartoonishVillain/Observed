@@ -2,12 +2,12 @@ package com.cartoonishvillain.observed.events;
 
 import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,15 +16,15 @@ import net.minecraftforge.fml.common.Mod;
 public class Spawns {
     @SubscribeEvent
     public static void NaturalSpawner(BiomeLoadingEvent event){
-        MobSpawnSettings.SpawnerData spawners = new MobSpawnSettings.SpawnerData(Register.OBSERVER.get(), 6, 1, 1);
+        MobSpawnInfo.Spawners spawners = new MobSpawnInfo.Spawners(Register.OBSERVER.get(), 6, 1, 1);
 
-        if(!(event.getCategory() == Biome.BiomeCategory.NETHER) && !(event.getCategory() == Biome.BiomeCategory.THEEND)){
-            event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
+        if(!(event.getCategory() == Biome.Category.NETHER) && !(event.getCategory() == Biome.Category.THEEND)){
+            event.getSpawns().addSpawn(EntityClassification.MONSTER, spawners);
         }
     }
 
     public static void PlacementManager(){
-        SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
+        EntitySpawnPlacementRegistry.register(Register.OBSERVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
 
     }
 }

@@ -2,23 +2,32 @@ package com.cartoonishvillain.observed.client.models;
 
 import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
-import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.BipedRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.util.ResourceLocation;
 
-public class RenderObserver extends HumanoidMobRenderer<ObserverEntity, HumanoidModel<ObserverEntity>> {
+public class RenderObserver extends BipedRenderer<ObserverEntity, BipedModel<ObserverEntity>> {
 
     protected final static ResourceLocation TEXTURE = new ResourceLocation(Observed.MODID, "textures/entity/observerflesh.png");
 
 
-    public RenderObserver(EntityRendererProvider.Context p_174169_) {
-        super(p_174169_, new HumanoidModel<ObserverEntity>(p_174169_.bakeLayer(ModelLayers.PLAYER)), 0.5f);
+    public RenderObserver(EntityRendererManager p_174169_) {
+        super(p_174169_, new Model(), 0.5f);
         this.addLayer(new GlowingLayer(this));
     }
+
+    private static class Model extends BipedModel<ObserverEntity> {
+        private static RenderType makeRenderType(ResourceLocation texture) {
+            RenderType normal = RenderType.entityCutoutNoCull(texture);
+            return normal;}
+
+        Model() {
+            super(Model::makeRenderType, 0, 0, 64, 64);
+        }
+    }
+
 
     @Override
     public ResourceLocation getTextureLocation(ObserverEntity entity) {
