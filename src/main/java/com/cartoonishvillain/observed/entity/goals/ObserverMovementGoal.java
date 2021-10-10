@@ -25,7 +25,7 @@ public class ObserverMovementGoal<T extends ObserverEntity> extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.observer.getLastLoc() != null && this.observer.getTarget() == null;
+        return this.observer.getLastLoc() != null && this.observer.getTarget() == null && !this.observer.isPathFinding();
     }
 
     @Override

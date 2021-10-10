@@ -50,7 +50,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         super.registerGoals();
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 10f, 1.0D, 1.2D, this::avoid ));
-        this.goalSelector.addGoal(2, new ObservationGoal(this, 1.25D, 20, 20));
+        this.goalSelector.addGoal(2, new ObservationGoal(this, 1.25D, 20, Observed.config.OBSERVERRANGE.get().floatValue()));
         this.goalSelector.addGoal(3, new ObserverMovementGoal<>(this));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1));
@@ -127,9 +127,12 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         float distance = this.distanceTo(player);
         float effect;
 
-        if(distance <= 5){effect = 1;}
-        else if(distance <= 10){effect = 0.5f;}
-        else {effect = 0.25f;}
+        float range = Observed.config.OBSERVERRANGE.get();
+        float distanceDivided = distance/range;
+
+        if(distanceDivided <= 0.3){effect = Observed.config.CLOSEOBSERVERATE.get().floatValue();}
+        else if(distanceDivided <= 0.6){effect = Observed.config.NEAROBSERVERATE.get().floatValue();}
+        else {effect = Observed.config.FAROBSERVERATE.get().floatValue();}
 
         boolean calyxCheck = Observed.isCalyxLoaded;
 

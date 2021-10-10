@@ -1,5 +1,6 @@
 package com.cartoonishvillain.observed.entity.goals;
 
+import com.cartoonishvillain.observed.Observed;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 
@@ -16,10 +17,10 @@ public class ObservationGoal extends RangedAttackGoal {
         if(this.mob.tickCount % 20 == 0) {
             float targetDistance = this.target.distanceTo(this.mob);
             //move closer to keep observing if target is almost out of range
-            if(this.attackRadius - targetDistance < 8.5 && !this.mob.getNavigation().isInProgress()){
-            this.mob.getNavigation().moveTo(this.target, 1);}
+            if(this.attackRadius - targetDistance < Observed.config.OBSERVERFOLLOWPOINT.get() && !this.mob.getNavigation().isInProgress())
+            {this.mob.getNavigation().moveTo(this.target, 1);}
             //otherwise if we are close enough and are still moving, stop moving
-            else if(this.attackRadius - targetDistance > 8.5 && this.mob.getNavigation().isInProgress()){
+            else if(this.attackRadius - targetDistance > Observed.config.OBSERVERFOLLOWPOINT.get() && this.mob.getNavigation().isInProgress()){
                 this.mob.getNavigation().stop();
             }
         }
