@@ -34,9 +34,9 @@ public class ForgeBusEvents {
         if(!event.player.level.isClientSide() && event.phase.equals(TickEvent.Phase.END) && event.player.tickCount % 20 == 0){
             event.player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
                 float levelRemoved;
-                if(h.getObserveLevel() >= 60){levelRemoved = -0.35f;}
-                else if(h.getObserveLevel() >= 20){levelRemoved = -0.20f;}
-                else {levelRemoved = -0.1f;}
+                if(h.getObserveLevel() >= 60){levelRemoved = Observed.config.HIGHDRAINRATE.get().floatValue() * -1f;}
+                else if(h.getObserveLevel() >= 20){levelRemoved = Observed.config.MIDDRAINRATE.get().floatValue() * -1f;}
+                else {levelRemoved = -Observed.config.LOWDRAINRATE.get().floatValue() * -1f;}
                 h.changeObserveLevel(levelRemoved);
 
 

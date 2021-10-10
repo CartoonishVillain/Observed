@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 public class Spawns {
     @SubscribeEvent
     public static void NaturalSpawner(BiomeLoadingEvent event){
-        MobSpawnInfo.Spawners spawners = new MobSpawnInfo.Spawners(Register.OBSERVER.get(), 6, 1, 1);
+        MobSpawnInfo.Spawners spawners = new MobSpawnInfo.Spawners(Register.OBSERVER.get(), Observed.config.OBSERVERWEIGHT.get(), 1, 1);
 
         if(!(event.getCategory() == Biome.Category.NETHER) && !(event.getCategory() == Biome.Category.THEEND)){
             event.getSpawns().addSpawn(EntityClassification.MONSTER, spawners);
