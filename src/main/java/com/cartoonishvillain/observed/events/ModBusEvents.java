@@ -30,7 +30,7 @@ public class ModBusEvents {
 
     @SubscribeEvent
     public static void entityRegister(final RegistryEvent.Register<EntityType<?>> event){
-        Spawns.PlacementManager();
+
     }
 
 

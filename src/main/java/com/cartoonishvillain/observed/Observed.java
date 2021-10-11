@@ -2,6 +2,7 @@ package com.cartoonishvillain.observed;
 
 import com.cartoonishvillain.observed.config.CommonConfig;
 import com.cartoonishvillain.observed.config.ConfigHelper;
+import com.cartoonishvillain.observed.events.Spawns;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -33,6 +34,7 @@ public class Observed
     private void setup(final FMLCommonSetupEvent event)
     {
         isCalyxLoaded = ModList.get().isLoaded("immortuoscalyx");
+        Spawns.PlacementManager();
     }
 
 }
