@@ -3,6 +3,7 @@ package com.cartoonishvillain.observed;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.config.CommonConfig;
 import com.cartoonishvillain.observed.config.ConfigHelper;
+import com.cartoonishvillain.observed.events.Spawns;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -27,8 +28,9 @@ public class Observed
     public Observed() {
         // Register the setup method for modloading
         config = ConfigHelper.register(ModConfig.Type.COMMON, CommonConfig::new);
-        Register.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        Register.init();
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -37,6 +39,7 @@ public class Observed
     {
         PlayerCapability.register();
         isCalyxLoaded = ModList.get().isLoaded("immortuoscalyx");
+        Spawns.PlacementManager();
     }
 
 }

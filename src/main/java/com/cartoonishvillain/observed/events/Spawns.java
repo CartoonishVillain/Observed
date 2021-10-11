@@ -24,7 +24,11 @@ public class Spawns {
     }
 
     public static void PlacementManager(){
-        EntitySpawnPlacementRegistry.register(Register.OBSERVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+        if(Observed.config.CAVEOBSERVERS.get()){
+            EntitySpawnPlacementRegistry.register(Register.OBSERVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::checkMobSpawnRules);
+        }
+        else
+        EntitySpawnPlacementRegistry.register(Register.OBSERVER.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.WORLD_SURFACE, MobEntity::checkMobSpawnRules);
 
     }
 }
