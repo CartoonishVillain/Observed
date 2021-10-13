@@ -42,29 +42,29 @@ public class ForgeBusEvents {
 
 
                 if(h.getObserveLevel() >= 10){
-                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 0, Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
                 }else if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 0){event.player.removeEffect(ObserveEffect.observed);}
 
 
                 if(h.getObserveLevel() >= 50){
-                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 1, Observed.config.EFFECTPARTICLES.get(), true));
-                    event.player.addEffect(new EffectInstance(Effects.HUNGER, 1000000, 0, Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 1, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(Effects.HUNGER, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
                 }else{
                     if(event.player.hasEffect(Effects.HUNGER) && event.player.getEffect(Effects.HUNGER).getDuration() > 12000){event.player.removeEffect(Effects.HUNGER);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 1){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
                 if(h.getObserveLevel() >= 75){
-                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 2, Observed.config.EFFECTPARTICLES.get(), true));
-                    event.player.addEffect(new EffectInstance(Effects.WEAKNESS, 1000000, 0, Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 2, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(Effects.WEAKNESS, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
                 }else{
                     if(event.player.hasEffect(Effects.WEAKNESS) && event.player.getEffect(Effects.WEAKNESS).getDuration() > 12000){event.player.removeEffect(Effects.WEAKNESS);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 2){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
                 if (h.getObserveLevel() >= 90){
-                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 3, Observed.config.EFFECTPARTICLES.get(), true));
-                    event.player.addEffect(new EffectInstance(Effects.WITHER, 1000000, 1, Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(ObserveEffect.observed, 1000000, 3, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
+                    event.player.addEffect(new EffectInstance(Effects.WITHER, 1000000, 1, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
                 } else{
                     if(event.player.hasEffect(Effects.WITHER) && event.player.getEffect(Effects.WITHER).getDuration() > 12000){event.player.removeEffect(Effects.WITHER);}
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 3){event.player.removeEffect(ObserveEffect.observed);}
