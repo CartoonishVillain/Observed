@@ -21,6 +21,10 @@ public class CommonConfig {
     public ConfigHelper.ConfigValueListener<Double> MIDDRAINRATE;
     public ConfigHelper.ConfigValueListener<Double> LOWDRAINRATE;
 
+    public ConfigHelper.ConfigValueListener<Boolean> EFFECTPARTICLES;
+
+
+
     public CommonConfig(ForgeConfigSpec.Builder builder, ConfigHelper.Subscriber subscriber){
         builder.comment("Modify the rules for Observers").push(CATEGORY);
         this.OBSERVERRANGE = subscriber.subscribe(builder.comment("Changes how far an observer can notice a player from. Lower values make observers less expensive on system resources.").defineInRange("observerRange", 32, 10, 64));
@@ -35,5 +39,7 @@ public class CommonConfig {
         this.HIGHDRAINRATE = subscriber.subscribe(builder.comment("Rate of observation point drain per second when above 60% observed").defineInRange("highDrainRate", 0.35, 0, 1));
         this.MIDDRAINRATE = subscriber.subscribe(builder.comment("Rate of observation point drain per second when below 60% observed, but above 20%").defineInRange("midDrainRate", 0.2, 0, 1));
         this.LOWDRAINRATE = subscriber.subscribe(builder.comment("Rate of observation point drain per second below 20% observed").defineInRange("lowDrainRate", 0.1, 0, 1));
+
+        this.EFFECTPARTICLES = subscriber.subscribe(builder.comment("Does the Observed effect show particles?").define("observedEffectParticles", false));
     }
 }
