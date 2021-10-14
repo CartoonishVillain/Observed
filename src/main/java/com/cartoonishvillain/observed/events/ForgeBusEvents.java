@@ -6,6 +6,7 @@ import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapabilityManager;
+import com.cartoonishvillain.observed.commands.SetObservedLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +23,12 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Observed.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeBusEvents {
+
+
+    @SubscribeEvent
+    public static void commands(RegisterCommandsEvent event){
+        SetObservedLevel.register(event.getDispatcher());
+    }
 
     @SubscribeEvent
     public static void playerRegister(AttachCapabilitiesEvent<Entity> event){
