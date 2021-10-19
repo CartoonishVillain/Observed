@@ -19,6 +19,7 @@ public class Observed
     // Directly reference a log4j logger.
     public static final String MODID = "observed";
     public static boolean isCalyxLoaded;
+    public static boolean tormentInstalled = false;
     private static final Logger LOGGER = LogManager.getLogger();
     public static CommonConfig config;
 
@@ -34,6 +35,7 @@ public class Observed
     private void setup(final FMLCommonSetupEvent event)
     {
         isCalyxLoaded = ModList.get().isLoaded("immortuoscalyx");
+        tormentInstalled = (ModList.get().isLoaded("torment") && config.TORMENTCOMPAT.get());
         Spawns.PlacementManager();
     }
 

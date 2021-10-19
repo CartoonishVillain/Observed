@@ -7,6 +7,7 @@ import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.goals.NearestObservableGoal;
 import com.cartoonishvillain.observed.entity.goals.ObservationGoal;
 import com.cartoonishvillain.observed.entity.goals.ObserverMovementGoal;
+import io.github.noeppi_noeppi.mods.torment.cap.TormentData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -120,6 +121,14 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         return Register.OBSERVERDEATH.get();
     }
 
+    private float boostEffect(float effectStrength, Player player){
+        TormentData tormentData = TormentData.get(player);
+        float multiplier = 0.05f * tormentData.getTormentLevel();
+        multiplier += 1;
+        effectStrength = effectStrength * multiplier;
+        return effectStrength;
+    }
+
     private void affectPlayer(Player player){
         ArrayList<Player> players = (ArrayList<Player>) player.level.getEntitiesOfClass(Player.class, player.getBoundingBox().inflate(5));
         players.remove(player);
@@ -134,6 +143,8 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         else if(distanceDivided <= 0.6){effect = Observed.config.NEAROBSERVERATE.get().floatValue();}
         else {effect = Observed.config.FAROBSERVERATE.get().floatValue();}
 
+        if (Observed.tormentInstalled) effect = boostEffect(effect, player);
+
         boolean calyxCheck = Observed.isCalyxLoaded;
 
         AtomicBoolean protectedByCalyx = new AtomicBoolean(false);
@@ -147,8 +158,9 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
         }
 
         if(!protectedByCalyx.get()){
-        player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
-            h.changeObserveLevel(effect);
+            float finalEffect = effect;
+            player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
+            h.changeObserveLevel(finalEffect);
         });}
 
         protectedByCalyx.set(false);
@@ -159,8 +171,9 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
                 }
             });
             if(!protectedByCalyx.get()) {
+                float finalEffect = effect;
                 sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
-                    h.changeObserveLevel(effect / 2f);
+                    h.changeObserveLevel(finalEffect / 2f);
                 });
             }
             protectedByCalyx.set(false);

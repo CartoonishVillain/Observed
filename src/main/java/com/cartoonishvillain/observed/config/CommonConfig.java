@@ -22,6 +22,8 @@ public class CommonConfig {
     public ConfigHelper.ConfigValueListener<Double> LOWDRAINRATE;
 
     public ConfigHelper.ConfigValueListener<Boolean> EFFECTPARTICLES;
+    public ConfigHelper.ConfigValueListener<Boolean> TORMENTCOMPAT;
+
 
 
 
@@ -41,5 +43,8 @@ public class CommonConfig {
         this.LOWDRAINRATE = subscriber.subscribe(builder.comment("Rate of observation point drain per second below 20% observed").defineInRange("lowDrainRate", 0.1, 0, 1));
 
         this.EFFECTPARTICLES = subscriber.subscribe(builder.comment("Does the Observed effect show particles?").define("observedEffectParticles", false));
+
+        this.TORMENTCOMPAT = subscriber.subscribe(builder.comment("Enables or disables compat with Torment, a fellow SpookyJam 2021 mod. Players with higher level of torment get their observed points gained multiplied by 2.5% per point of torment. This does nothing without the mod installed.").define("observedTormentCompat", true));
+
     }
 }
