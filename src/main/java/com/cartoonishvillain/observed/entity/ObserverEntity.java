@@ -148,11 +148,13 @@ public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
 
         protectedByCalyx.set(false);
         for (PlayerEntity sideEffected : players){
-            sideEffected.getCapability(InfectionManagerCapability.INSTANCE).ifPresent(h->{
-                if(h.getInfectionProgress() > 25){
-                    protectedByCalyx.set(true);
-                }
-            });
+            if(calyxCheck) {
+                sideEffected.getCapability(InfectionManagerCapability.INSTANCE).ifPresent(h -> {
+                    if (h.getInfectionProgress() > 25) {
+                        protectedByCalyx.set(true);
+                    }
+                });
+            }
             if(!protectedByCalyx.get()) {
                 sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
                     h.changeObserveLevel(effect / 2f);
