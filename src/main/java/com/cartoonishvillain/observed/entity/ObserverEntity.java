@@ -123,7 +123,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
 
     private float boostEffect(float effectStrength, Player player){
         TormentData tormentData = TormentData.get(player);
-        float multiplier = 0.05f * tormentData.getTormentLevel();
+        float multiplier = Observed.config.TORMENTCOMPATVALUE.get().floatValue() * tormentData.getTormentLevel();
         multiplier += 1;
         effectStrength = effectStrength * multiplier;
         return effectStrength;
