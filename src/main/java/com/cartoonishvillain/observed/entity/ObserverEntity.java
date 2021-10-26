@@ -7,6 +7,7 @@ import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.goals.NearestObservableGoal;
 import com.cartoonishvillain.observed.entity.goals.ObservationGoal;
 import com.cartoonishvillain.observed.entity.goals.ObserverMovementGoal;
+import com.cartoonishvillain.observed.events.ForgeBusEvents;
 import io.github.noeppi_noeppi.mods.torment.cap.TormentData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -157,7 +158,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
             });
         }
 
-        if(!protectedByCalyx.get()){
+        if(!protectedByCalyx.get() && ForgeBusEvents.ValidPlayer(player)){
             float finalEffect = effect;
             player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
             h.changeObserveLevel(finalEffect);
@@ -172,7 +173,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
                     }
                 });
             }
-            if(!protectedByCalyx.get()) {
+            if(!protectedByCalyx.get() && ForgeBusEvents.ValidPlayer(sideEffected)) {
                 float finalEffect = effect;
                 sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
                     h.changeObserveLevel(finalEffect / 2f);

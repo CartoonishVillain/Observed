@@ -47,16 +47,18 @@ public class ForgeBusEvents {
                 if(h.getObserveLevel() >= 60){levelRemoved = Observed.config.HIGHDRAINRATE.get().floatValue() * -1f;}
                 else if(h.getObserveLevel() >= 20){levelRemoved = Observed.config.MIDDRAINRATE.get().floatValue() * -1f;}
                 else {levelRemoved = Observed.config.LOWDRAINRATE.get().floatValue() * -1f;}
-                h.changeObserveLevel(levelRemoved);
+
+                if(ValidPlayer(event.player)){
+                h.changeObserveLevel(levelRemoved);}
 
 
 
-                if(h.getObserveLevel() >= 10){
+                if(h.getObserveLevel() >= 10 && ValidPlayer(event.player)){
                     event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), Observed.config.EFFECTPARTICLES.get(), true));
                 }else if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 0){event.player.removeEffect(ObserveEffect.observed);}
 
 
-                if(h.getObserveLevel() >= 50){
+                if(h.getObserveLevel() >= 50 && ValidPlayer(event.player)){
                     event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 1, !Observed.config.EFFECTPARTICLES.get(), true));
                     event.player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), true));
                 }else{
@@ -64,7 +66,7 @@ public class ForgeBusEvents {
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 1){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
-                if(h.getObserveLevel() >= 75){
+                if(h.getObserveLevel() >= 75 && ValidPlayer(event.player)){
                     event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 2, !Observed.config.EFFECTPARTICLES.get(), true));
                     event.player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1000000, 0, !Observed.config.EFFECTPARTICLES.get(), true));
                 }else{
@@ -72,7 +74,7 @@ public class ForgeBusEvents {
                     if(event.player.hasEffect(ObserveEffect.observed) && event.player.getEffect(ObserveEffect.observed).getAmplifier() == 2){event.player.removeEffect(ObserveEffect.observed);}
                 }
 
-                if (h.getObserveLevel() >= 90){
+                if (h.getObserveLevel() >= 90 && ValidPlayer(event.player)){
                     event.player.addEffect(new MobEffectInstance(ObserveEffect.observed, 1000000, 3, !Observed.config.EFFECTPARTICLES.get(), true));
                     event.player.addEffect(new MobEffectInstance(MobEffects.WITHER, 1000000, 1, !Observed.config.EFFECTPARTICLES.get(), true));
                 } else{
@@ -94,5 +96,9 @@ public class ForgeBusEvents {
             });
         }
         }
+    }
+
+    public static boolean ValidPlayer(Player player){
+        return !player.isCreative() && !player.isSpectator();
     }
 }
