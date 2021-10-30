@@ -1,5 +1,7 @@
 package com.cartoonishvillain.observed;
 
+import com.cartoonishvillain.ImmortuosCalyx.ImmortuosCalyx;
+import com.cartoonishvillain.ImmortuosCalyx.Items.ImmortuosSpawnEggItem;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -34,6 +36,10 @@ public class Register {
     public static final RegistryObject<SoundEvent> OBSERVERATTACK = SOUND_EVENT.register("attack_sounds", () -> new SoundEvent(new ResourceLocation(Observed.MODID, "attack_sounds")));
     public static final RegistryObject<SoundEvent> OBSERVERHURT = SOUND_EVENT.register("hurt_sounds", () -> new SoundEvent(new ResourceLocation(Observed.MODID, "hurt_sounds")));
     public static final RegistryObject<SoundEvent> OBSERVERDEATH = SOUND_EVENT.register("death_sounds", () -> new SoundEvent(new ResourceLocation(Observed.MODID, "death_sounds")));
+
+
+    public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ObserverSpawnEgg(Register.OBSERVER, 2097152, 10131200, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
 
 
 }
