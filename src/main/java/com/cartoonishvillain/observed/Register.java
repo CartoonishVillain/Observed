@@ -35,5 +35,7 @@ public class Register {
     public static final RegistryObject<SoundEvent> OBSERVERHURT = SOUND_EVENT.register("hurt_sounds", () -> new SoundEvent(new ResourceLocation(Observed.MODID, "hurt_sounds")));
     public static final RegistryObject<SoundEvent> OBSERVERDEATH = SOUND_EVENT.register("death_sounds", () -> new SoundEvent(new ResourceLocation(Observed.MODID, "death_sounds")));
 
+    public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ObserverSpawnEgg(Register.OBSERVER, 2097152, 10131200, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+
 
 }

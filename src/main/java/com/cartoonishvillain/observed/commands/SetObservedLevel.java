@@ -14,11 +14,11 @@ import java.util.Collection;
 
 public class SetObservedLevel {
     public static void register(CommandDispatcher<CommandSource> dispatcher){
-        dispatcher.register(Commands.literal("setobservedlevel")
+        dispatcher.register(Commands.literal("observed").then(Commands.literal("setobservedlevel")
                 .requires(cs -> {return cs.hasPermission(2);})
                 .then(Commands.argument("target", GameProfileArgument.gameProfile()).then(Commands.argument("level", FloatArgumentType.floatArg(0, 100)).executes(context -> {
                     return setHauntChance(context.getSource(), GameProfileArgument.getGameProfiles(context, "target"), FloatArgumentType.getFloat(context, "level"));
-                })))
+                }))))
 
         );
     }
