@@ -29,6 +29,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.cartoonishvillain.observed.events.ForgeBusEvents.ValidPlayer;
+
 public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
     public ObserverEntity(EntityType<? extends MonsterEntity> p_33002_, World p_33003_) {
         super(p_33002_, p_33003_);
@@ -141,7 +143,7 @@ public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
             });
         }
 
-        if(!protectedByCalyx.get()){
+        if(!protectedByCalyx.get() && ValidPlayer(player)){
         player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
             h.changeObserveLevel(effect);
         });}
@@ -155,7 +157,7 @@ public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
                     }
                 });
             }
-            if(!protectedByCalyx.get()) {
+            if(!protectedByCalyx.get() && ValidPlayer(sideEffected)) {
                 sideEffected.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
                     h.changeObserveLevel(effect / 2f);
                 });
