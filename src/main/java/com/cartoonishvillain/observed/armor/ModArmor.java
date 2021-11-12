@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Supplier;
 
 public enum ModArmor implements ArmorMaterial {
-    LENS(Observed.MODID + ":lens",  23, new int[] {1, 0, 0, 1}, 8, SoundEvents.ARMOR_EQUIP_LEATHER, 0, ()->{return Ingredient.of(Register.OBSERVEREYE.get());}, 0.0f);
+    LENS(Observed.MODID + ":lens",  7, new int[] {1, 0, 0, 1}, 8, SoundEvents.ARMOR_EQUIP_LEATHER, 0, ()->{return Ingredient.of(Register.OBSERVEREYE.get());}, 0.0f);
 
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[] {11, 16, 15, 13};
