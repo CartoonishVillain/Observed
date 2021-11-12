@@ -1,8 +1,11 @@
 package com.cartoonishvillain.observed.entity.goals;
 
 import com.cartoonishvillain.observed.Observed;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+
+import static com.cartoonishvillain.observed.Observed.RANGEBLOCKINGITEMS;
 
 public class ObservationGoal extends RangedAttackGoal {
     public ObservationGoal(RangedAttackMob p_25768_, double p_25769_, int p_25770_, float p_25771_) {
@@ -16,11 +19,19 @@ public class ObservationGoal extends RangedAttackGoal {
 
         if(this.mob.tickCount % 20 == 0) {
             float targetDistance = this.target.distanceTo(this.mob);
+
             //move closer to keep observing if target is almost out of range
-            if(this.attackRadius - targetDistance < Observed.config.OBSERVERFOLLOWPOINT.get() && !this.mob.getNavigation().isInProgress())
+            double followRange = Observed.config.OBSERVERFOLLOWPOINT.get();
+            float range = this.attackRadius;
+
+            if(RANGEBLOCKINGITEMS.contains(this.target.getItemBySlot(EquipmentSlot.HEAD).getItem())) {
+                followRange = followRange/2f;
+                range = range/2f;
+            }
+            if(range - targetDistance < followRange && !this.mob.getNavigation().isInProgress())
             {this.mob.getNavigation().moveTo(this.target, 1);}
             //otherwise if we are close enough and are still moving, stop moving
-            else if(this.attackRadius - targetDistance > Observed.config.OBSERVERFOLLOWPOINT.get() && this.mob.getNavigation().isInProgress()){
+            else if(range - targetDistance > followRange && this.mob.getNavigation().isInProgress()){
                 this.mob.getNavigation().stop();
             }
         }

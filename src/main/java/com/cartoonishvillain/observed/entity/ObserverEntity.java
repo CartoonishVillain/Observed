@@ -14,10 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.AreaEffectCloud;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -30,6 +27,8 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.cartoonishvillain.observed.Observed.RANGEBLOCKINGITEMS;
 
 public class ObserverEntity extends Monster implements RangedAttackMob {
     public ObserverEntity(EntityType<? extends Monster> p_33002_, Level p_33003_) {
@@ -64,7 +63,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
     }
 
     public boolean shouldAttack(@Nullable LivingEntity entity){
-        return entity != null;
+        return entity instanceof Player && !(RANGEBLOCKINGITEMS.contains(entity.getItemBySlot(EquipmentSlot.HEAD).getItem()) && entity.distanceTo(this) > Observed.config.OBSERVERRANGE.get().floatValue()/2f);
     }
 
     @Override
@@ -73,6 +72,8 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
             affectPlayer((Player) p_33317_);
         }
     }
+
+
 
     @Override
     public void tick() {
