@@ -1,8 +1,12 @@
 package com.cartoonishvillain.observed;
 
+import com.cartoonishvillain.observed.armor.LensArmor;
+import com.cartoonishvillain.observed.armor.ModArmor;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -37,5 +41,6 @@ public class Register {
 
     public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ObserverSpawnEgg(Register.OBSERVER, 2097152, 10131200, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
+    public static final RegistryObject<ArmorItem> LENSARMOR = ITEMS.register("observer_lenses", () -> new LensArmor(ModArmor.LENS, EquipmentSlotType.HEAD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
 }

@@ -9,6 +9,7 @@ import com.cartoonishvillain.observed.capabilities.PlayerCapabilityManager;
 import com.cartoonishvillain.observed.commands.SetObservedLevel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
@@ -39,6 +40,11 @@ public class ForgeBusEvents {
     @SubscribeEvent
     public static void playerObserveTick(TickEvent.PlayerTickEvent event){
         if(!event.player.level.isClientSide() && event.phase.equals(TickEvent.Phase.END) && event.player.tickCount % 20 == 0){
+
+            if(event.player.getItemBySlot(EquipmentSlotType.HEAD).getItem().equals(Register.LENSARMOR.get())){
+                event.player.addEffect(new EffectInstance(Effects.NIGHT_VISION, 20*12, 0, false, false));
+            }
+
             event.player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
                 float levelRemoved;
                 if(h.getObserveLevel() >= 60){levelRemoved = Observed.config.HIGHDRAINRATE.get().floatValue() * -1f;}
