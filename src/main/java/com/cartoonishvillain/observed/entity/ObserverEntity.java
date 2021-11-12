@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.potion.Effects;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.DamageSource;
@@ -29,6 +30,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.cartoonishvillain.observed.Observed.RANGEBLOCKINGITEMS;
 import static com.cartoonishvillain.observed.events.ForgeBusEvents.ValidPlayer;
 
 public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
@@ -64,7 +66,7 @@ public class ObserverEntity extends MonsterEntity implements IRangedAttackMob {
     }
 
     public boolean shouldAttack(@Nullable LivingEntity entity){
-        return entity != null;
+        return entity instanceof PlayerEntity && !(RANGEBLOCKINGITEMS.contains(entity.getItemBySlot(EquipmentSlotType.HEAD).getItem()) && entity.distanceTo(this) > Observed.config.OBSERVERRANGE.get().floatValue()/2f);
     }
 
 
