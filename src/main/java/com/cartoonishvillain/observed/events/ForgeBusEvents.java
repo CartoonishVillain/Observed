@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -42,6 +43,10 @@ public class ForgeBusEvents {
     @SubscribeEvent
     public static void playerObserveTick(TickEvent.PlayerTickEvent event){
         if(!event.player.level.isClientSide() && event.phase.equals(TickEvent.Phase.END) && event.player.tickCount % 20 == 0){
+            if(event.player.getItemBySlot(EquipmentSlot.HEAD).getItem().equals(Register.LENSARMOR.get())){
+                event.player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20*12, 0, false, false));
+            }
+
             event.player.getCapability(PlayerCapability.INSTANCE).ifPresent(h->{
                 float levelRemoved;
                 if(h.getObserveLevel() >= 60){levelRemoved = Observed.config.HIGHDRAINRATE.get().floatValue() * -1f;}

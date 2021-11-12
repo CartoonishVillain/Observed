@@ -2,14 +2,18 @@ package com.cartoonishvillain.observed;
 
 import com.cartoonishvillain.ImmortuosCalyx.ImmortuosCalyx;
 import com.cartoonishvillain.ImmortuosCalyx.Items.ImmortuosSpawnEggItem;
+import com.cartoonishvillain.observed.armor.LensArmor;
+import com.cartoonishvillain.observed.armor.ModArmor;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -40,6 +44,7 @@ public class Register {
 
     public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ObserverSpawnEgg(Register.OBSERVER, 2097152, 10131200, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
+    public static final RegistryObject<ArmorItem> LENSARMOR = ITEMS.register("observer_lenses", () -> new LensArmor(ModArmor.LENS, EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
 
 }
