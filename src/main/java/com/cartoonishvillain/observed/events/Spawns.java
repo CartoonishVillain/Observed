@@ -20,7 +20,7 @@ public class Spawns {
     public static void NaturalSpawner(BiomeLoadingEvent event){
         MobSpawnSettings.SpawnerData spawners = new MobSpawnSettings.SpawnerData(Register.OBSERVER.get(), Observed.config.OBSERVERWEIGHT.get(), 1, 1);
 
-        if(!(event.getCategory() == Biome.BiomeCategory.NETHER) && !(event.getCategory() == Biome.BiomeCategory.THEEND)){
+        if(!(event.getCategory() == Biome.BiomeCategory.NETHER) && !(event.getCategory() == Biome.BiomeCategory.THEEND) && !(event.getCategory() == Biome.BiomeCategory.MUSHROOM)){
             event.getSpawns().addSpawn(MobCategory.MONSTER, spawners);
         }
     }
