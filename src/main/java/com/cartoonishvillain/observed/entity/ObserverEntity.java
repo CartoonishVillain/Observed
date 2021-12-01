@@ -1,6 +1,6 @@
 package com.cartoonishvillain.observed.entity;
 
-import com.cartoonishvillain.ImmortuosCalyx.Infection.InfectionManagerCapability;
+import com.cartoonishvillain.ImmortuosCalyx.infection.InfectionManagerCapability;
 import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;

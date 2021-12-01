@@ -2,6 +2,7 @@ package com.cartoonishvillain.observed.events;
 
 import com.cartoonishvillain.observed.ObserveEffect;
 import com.cartoonishvillain.observed.Observed;
+import com.cartoonishvillain.observed.ObserverSpawnEgg;
 import com.cartoonishvillain.observed.Register;
 import com.cartoonishvillain.observed.capabilities.IPlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
@@ -30,7 +31,7 @@ public class ModBusEvents {
 
     @SubscribeEvent
     public static void entityRegister(final RegistryEvent.Register<EntityType<?>> event){
-
+        ObserverSpawnEgg.initSpawnEggs();
     }
 
 

@@ -1,7 +1,5 @@
 package com.cartoonishvillain.observed;
 
-import com.cartoonishvillain.ImmortuosCalyx.ImmortuosCalyx;
-import com.cartoonishvillain.ImmortuosCalyx.Items.ImmortuosSpawnEggItem;
 import com.cartoonishvillain.observed.armor.LensArmor;
 import com.cartoonishvillain.observed.armor.ModArmor;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
@@ -17,9 +15,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class Register {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Observed.MODID);

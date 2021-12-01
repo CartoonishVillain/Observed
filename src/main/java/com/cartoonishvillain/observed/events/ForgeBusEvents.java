@@ -1,6 +1,6 @@
 package com.cartoonishvillain.observed.events;
 
-import com.cartoonishvillain.ImmortuosCalyx.Infection.InfectionManagerCapability;
+import com.cartoonishvillain.ImmortuosCalyx.infection.InfectionManagerCapability;
 import com.cartoonishvillain.observed.ObserveEffect;
 import com.cartoonishvillain.observed.Observed;
 import com.cartoonishvillain.observed.Register;
@@ -12,8 +12,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
