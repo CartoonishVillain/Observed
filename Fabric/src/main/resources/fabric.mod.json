@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "observed",
+  "version": "${version}",
+
+  "custom": {
+    "cardinal-components": [
+      "observed:observelevel"
+    ]
+  },
+
+  "accessWidener" : "observed.accesswidener",
+
+  "name": "Observed",
+  "description": "Lurking in the background...",
+  "authors": [
+    "Cartoonish Villain"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "MIT",
+  "icon": "assets/observed/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.cartoonishvillain.observed.FabricObserved"
+    ],
+    "client": [
+      "com.cartoonishvillain.observed.client.ClientObserved"
+    ],
+    "cardinal-components-entity": [
+      "com.cartoonishvillain.observed.component.ComponentStarter"
+    ]
+  },
+  "mixins": [
+    "observed.fabric.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.5",
+    "fabric": "*",
+    "trinkets": ">=3.3.0",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "immortuoscalyx": "*"
+  }
+  }
+  
