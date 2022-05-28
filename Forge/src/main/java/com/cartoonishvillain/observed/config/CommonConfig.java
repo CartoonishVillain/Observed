@@ -25,6 +25,9 @@ public class CommonConfig {
     public ConfigHelper.ConfigValueListener<Boolean> TORMENTCOMPAT;
     public ConfigHelper.ConfigValueListener<Double> TORMENTCOMPATVALUE;
 
+    public ConfigHelper.ConfigValueListener<Integer> WALLVISIONLEVEL;
+    public ConfigHelper.ConfigValueListener<Integer> WALLVISIONRANGE;
+
 
 
 
@@ -47,6 +50,8 @@ public class CommonConfig {
 
         this.TORMENTCOMPAT = subscriber.subscribe(builder.comment("Enables or disables compat with Torment, a fellow SpookyJam 2021 mod. Players with higher level of torment get their observed points gained multiplied by the rate determined in tormentCompatRate per point of torment. This does nothing without the mod installed.").define("observedTormentCompat", true));
         this.TORMENTCOMPATVALUE = subscriber.subscribe(builder.comment("The multiplier each point of torment provides to the strength of the observed effect.").defineInRange("tormentCompatRate", 0.0125, 0, 1));
-        
+
+        this.WALLVISIONLEVEL = subscriber.subscribe(builder.comment("1 = Reduced visibility through walls (see next item), 2 = full visibility through walls, any other = no visibility through walls").defineInRange("wallVisionLevel", 0, 0, 2));
+        this.WALLVISIONRANGE = subscriber.subscribe(builder.comment("If WallVisionLevel is 1, what is the new range? Recommended to be lower than observerRange").defineInRange("wallVisionRange", 16, 1, 64));
     }
 }

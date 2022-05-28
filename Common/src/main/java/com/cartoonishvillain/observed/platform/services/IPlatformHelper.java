@@ -40,6 +40,9 @@ public interface IPlatformHelper {
     double mediumValueDrainRate();
     double lowValueDrainRate();
 
+    int getWallVisionLevel();
+    int getWallVisionRange();
+
     void setValue(ServerPlayer player, double value);
     void addValue(ServerPlayer player, double value);
     double getValue(ServerPlayer player);

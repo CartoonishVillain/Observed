@@ -77,6 +77,16 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public int getWallVisionLevel() {
+        return FabricObserved.config.observedOptions.wallVisionLevel;
+    }
+
+    @Override
+    public int getWallVisionRange() {
+        return FabricObserved.config.observedOptions.wallVisionRange;
+    }
+
+    @Override
     public void setValue(ServerPlayer player, double value) {
         OBSERVELEVEL.get(player).setObserveLevel((float) value);
     }

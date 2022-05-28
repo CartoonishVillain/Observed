@@ -78,6 +78,16 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
+    public int getWallVisionLevel() {
+        return ForgeObserved.config.WALLVISIONLEVEL.get();
+    }
+
+    @Override
+    public int getWallVisionRange() {
+        return ForgeObserved.config.WALLVISIONRANGE.get();
+    }
+
+    @Override
     public void setValue(ServerPlayer player, double value) {
         player.getCapability(PlayerCapability.INSTANCE).ifPresent(h -> {
             h.setObserveLevel((float) value);

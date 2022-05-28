@@ -59,7 +59,27 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
     }
 
     public boolean shouldAttack(@Nullable LivingEntity entity){
-        return entity instanceof Player && !(RANGEBLOCKINGITEMS.contains(entity.getItemBySlot(EquipmentSlot.HEAD).getItem()) && entity.distanceTo(this) > Services.PLATFORM.observerRange()/2f);
+        return skullCheck(entity);
+    }
+
+    public boolean skullCheck(@Nullable LivingEntity entity) {
+        if (!(entity instanceof Player)) return false;
+        int range = Services.PLATFORM.observerRange();
+        switch(Services.PLATFORM.getWallVisionLevel()) {
+            case 1:
+                //at level 1, a modified range is used
+                if (!this.hasLineOfSight(entity)) range = Services.PLATFORM.getWallVisionRange();
+                break;
+            case 2:
+                //at level 2, this check is ignored.
+                break;
+            default:
+                //default has no wall visibility
+                if (!this.hasLineOfSight(entity)) return false;
+        }
+
+        if(RANGEBLOCKINGITEMS.contains(entity.getItemBySlot(EquipmentSlot.HEAD).getItem())) range = range/2;
+       return entity.distanceTo(this) < range;
     }
 
     public static AttributeSupplier.Builder customAttributes(){

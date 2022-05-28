@@ -4,6 +4,7 @@ import com.cartoonishvillain.observed.commands.SetObservedLevel;
 import com.cartoonishvillain.observed.config.ObservedConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -30,7 +31,7 @@ public class FabricObserved implements ModInitializer {
 		// Proceed with mild caution.
 		ObservedCommon.init();
 
-		AutoConfig.register(ObservedConfig.class, GsonConfigSerializer::new);
+		AutoConfig.register(ObservedConfig.class, JanksonConfigSerializer::new);
 		config = AutoConfig.getConfigHolder(ObservedConfig.class).getConfig();
 
 		CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
