@@ -1,6 +1,6 @@
 package com.cartoonishvillain.observed.platform;
 
-import com.cartoonishvillain.ImmortuosCalyx.infection.InfectionManagerCapability;
+import com.cartoonishvillain.immortuoscalyx.infection.InfectionManagerCapability;
 import com.cartoonishvillain.observed.ForgeObserved;
 import com.cartoonishvillain.observed.ObserveEffect;
 import com.cartoonishvillain.observed.Register;
@@ -12,8 +12,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 
