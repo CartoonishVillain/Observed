@@ -2,7 +2,9 @@ package com.cartoonishvillain.observed.ticker;
 
 import com.cartoonishvillain.observed.platform.Services;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +21,10 @@ public class ComponentTicker {
     public static void tickObservation(ServerPlayer player){
         float observe = (float) Services.PLATFORM.getValue(player);
         if(!player.level.isClientSide && player.tickCount % 20 == 0){
+
+            if(Services.PLATFORM.isDevelopmentEnvironment() && player.isCrouching()) {
+                player.sendSystemMessage(Component.literal("Observed Level: " + Services.PLATFORM.getValue(player)));
+            }
 
             float levelRemoved;
             if(observe >= 60){levelRemoved = (float) -Services.PLATFORM.highValueDrainRate();}
@@ -65,7 +71,7 @@ public class ComponentTicker {
         return !player.isCreative() && !player.isSpectator();
     }
 
-    public static boolean spawnRules(EntityType<? extends Monster> p_21401_, LevelAccessor p_21402_, MobSpawnType p_21403_, BlockPos p_21404_, Random p_21405_){
+    public static boolean spawnRules(EntityType<? extends Monster> p_21401_, LevelAccessor p_21402_, MobSpawnType p_21403_, BlockPos p_21404_, RandomSource p_21405_){
         return p_21402_.canSeeSky(p_21404_) && Monster.checkMonsterSpawnRules(p_21401_, (ServerLevelAccessor) p_21402_, p_21403_, p_21404_, p_21405_);
     }
 }

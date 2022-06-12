@@ -3,18 +3,11 @@ package com.cartoonishvillain.observed;
 import com.cartoonishvillain.observed.commands.SetObservedLevel;
 import com.cartoonishvillain.observed.config.ObservedConfig;
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FabricObserved implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -34,7 +27,7 @@ public class FabricObserved implements ModInitializer {
 		AutoConfig.register(ObservedConfig.class, JanksonConfigSerializer::new);
 		config = AutoConfig.getConfigHolder(ObservedConfig.class).getConfig();
 
-		CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+		CommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess, dedicated) -> {
 			SetObservedLevel.register(dispatcher);
 		}));
 

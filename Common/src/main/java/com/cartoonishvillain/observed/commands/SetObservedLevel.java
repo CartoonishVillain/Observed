@@ -7,7 +7,7 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.GameProfileArgument;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
@@ -28,7 +28,7 @@ public class SetObservedLevel {
             ServerPlayer serverPlayerEntity = source.getServer().getPlayerList().getPlayer(gameProfile.getId());
             Services.PLATFORM.setValue(serverPlayerEntity, level);
         }
-        source.sendSuccess(new TranslatableComponent("command.observed.success", level), false);
+        source.sendSuccess(Component.translatable("command.observed.success", level), false);
         return 0;
     }
 }

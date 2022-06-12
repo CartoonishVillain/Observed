@@ -1,23 +1,22 @@
 package com.cartoonishvillain.observed.events;
 
-import com.cartoonishvillain.observed.Constants;
-import com.cartoonishvillain.observed.ObserveEffect;
-import com.cartoonishvillain.observed.ObserverSpawnEgg;
-import com.cartoonishvillain.observed.Register;
+import com.cartoonishvillain.observed.*;
 import com.cartoonishvillain.observed.capabilities.IPlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -36,20 +35,19 @@ public class ModBusEvents {
     }
 
     @SubscribeEvent
-    public static void effect(final RegistryEvent.Register<MobEffect> event){
-        ObserveEffect.init();
-    }
-
-    @SubscribeEvent
-    public static void entityRegister(final RegistryEvent.Register<EntityType<?>> event){
+    public static void effect(RegisterEvent event) {
         ObserverSpawnEgg.initSpawnEggs();
+        event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> {
+            if(ForgeObserved.config.CAVEOBSERVERS.get()) {
+                SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::caveSpawnRules);
+            } else
+                SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::spawnRules);
+        });
     }
-
 
     @SubscribeEvent
     public static void CapabilityRegister(final RegisterCapabilitiesEvent event){
         event.register(IPlayerCapability.class);
-
         PlayerCapability.INSTANCE = CapabilityManager.get(new CapabilityToken<IPlayerCapability>() {});
     }
 }

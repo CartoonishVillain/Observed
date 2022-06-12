@@ -38,7 +38,7 @@ public class Register {
 
     public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ObserverSpawnEgg(Register.OBSERVER, 2097152, 10131200, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-    public static final RegistryObject<Item> LENS = ITEMS.register("observer_lenses", () -> new Lenses(new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+    public static final RegistryObject<Item> LENS = ITEMS.register("observer_lenses", () -> new Lenses(new Item.Properties().tab(CreativeModeTab.TAB_TOOLS).stacksTo(1)));
 
 
 }

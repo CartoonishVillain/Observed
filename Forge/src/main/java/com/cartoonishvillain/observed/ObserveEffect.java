@@ -9,7 +9,7 @@ public class ObserveEffect {
     public static MobEffect observed;
 
     public static void init(){
-        observed = new ModdedPotionEffects( MobEffectCategory.HARMFUL, 9606036, new ResourceLocation(Constants.MOD_ID, "observedeffect"));
+        observed = new ModdedPotionEffects(MobEffectCategory.HARMFUL, 9606036, new ResourceLocation(Constants.MOD_ID, "observedeffect"));
     }
 
     /*
@@ -19,7 +19,7 @@ public class ObserveEffect {
 
         protected ModdedPotionEffects(MobEffectCategory p_19451_, int p_19452_, ResourceLocation location) {
             super(p_19451_, p_19452_);
-            ForgeRegistries.MOB_EFFECTS.register(this.setRegistryName(location));
+            ForgeRegistries.MOB_EFFECTS.register(location, this);
         }
     }
 }

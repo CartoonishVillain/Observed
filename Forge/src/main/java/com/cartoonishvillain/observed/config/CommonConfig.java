@@ -34,7 +34,6 @@ public class CommonConfig {
     public CommonConfig(ForgeConfigSpec.Builder builder, ConfigHelper.Subscriber subscriber){
         builder.comment("Modify the rules for Observers").push(CATEGORY);
         this.OBSERVERRANGE = subscriber.subscribe(builder.comment("Changes how far an observer can notice a player from. Lower values make observers less expensive on system resources.").defineInRange("observerRange", 32, 10, 64));
-        this.OBSERVERWEIGHT = subscriber.subscribe(builder.comment("Changes the spawn weight of the observer. Higher is more common. 100 is as common as zombies and the like.").defineInRange("observerWeight", 15, 0, 100));
         this.OBSERVERFOLLOWPOINT = subscriber.subscribe(builder.comment("How close to the edge of the range can a target get before the observer tries to follow. Higher values make observers move more often towards targets.").defineInRange("observerFollowRange", 7.5, 0, 60));
         this.CAVEOBSERVERS = subscriber.subscribe(builder.comment("Attempts to prevent observers from spawning in caves when set to false.").define("observerCaves", false));
 

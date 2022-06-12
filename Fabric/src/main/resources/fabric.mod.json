@@ -41,10 +41,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.12.5",
+    "fabricloader": ">=0.14.0",
     "fabric": "*",
     "trinkets": ">=3.3.0",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17"
   },
   "suggests": {

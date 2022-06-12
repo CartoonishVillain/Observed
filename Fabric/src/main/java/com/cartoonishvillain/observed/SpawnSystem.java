@@ -6,10 +6,10 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.util.function.Predicate;
@@ -28,23 +28,11 @@ public class SpawnSystem {
     }
 
     public static Predicate<BiomeSelectionContext> overWorldNoGoZones() {
-        return BiomeSelectors.all().and(shroomExclusion()).and(netherExclusion()).and(endExclusion()).and(oceanExclusion()).and(BiomeSelectors.foundInOverworld());
+        return BiomeSelectors.tag(BiomeTags.IS_OVERWORLD).and(shroomExclusion());
     }
 
     public static Predicate<BiomeSelectionContext> shroomExclusion() {
-        return Predicate.not(BiomeSelectors.categories(Biome.BiomeCategory.MUSHROOM));
-    }
-
-    public static Predicate<BiomeSelectionContext> netherExclusion() {
-        return Predicate.not(BiomeSelectors.categories(Biome.BiomeCategory.NETHER));
-    }
-
-    public static Predicate<BiomeSelectionContext> endExclusion() {
-        return Predicate.not(BiomeSelectors.categories(Biome.BiomeCategory.THEEND));
-    }
-
-    public static Predicate<BiomeSelectionContext> oceanExclusion() {
-        return Predicate.not(BiomeSelectors.categories(Biome.BiomeCategory.OCEAN));
+        return Predicate.not(BiomeSelectors.tag(ModdedBiomeTags.MushroomBiomes));
     }
 
 }
