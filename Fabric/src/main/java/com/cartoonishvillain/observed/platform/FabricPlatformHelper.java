@@ -33,57 +33,57 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public int observerRange() {
-        return FabricObserved.config.observedOptions.observerRange;
+        return FabricObserved.CONFIG.getOrDefault("observerRange", 32);
     }
 
     @Override
     public int observerSpawnWeight() {
-        return FabricObserved.config.observedOptions.observerSpawnWeight;
+        return FabricObserved.CONFIG.getOrDefault("observerSpawnWeight", 15);
     }
 
     @Override
     public double observerFollowDistance() {
-        return FabricObserved.config.observedOptions.observerFollowDistance;
+        return FabricObserved.CONFIG.getOrDefault("observerFollowDistance", 7.5);
     }
 
     @Override
     public double closeObserverGainRate() {
-        return FabricObserved.config.observedOptions.closeObserverGainRate;
+        return FabricObserved.CONFIG.getOrDefault("closeObserverGainRate", 1);
     }
 
     @Override
     public double nearButNotCloseObserverGainRate() {
-        return FabricObserved.config.observedOptions.nearButNotCloseObserverGainRate;
+        return FabricObserved.CONFIG.getOrDefault("nearButNotCloseObserverGainRate", 0.75);
     }
 
     @Override
     public double farObserverGainRate() {
-        return FabricObserved.config.observedOptions.farObserverGainRate;
+        return FabricObserved.CONFIG.getOrDefault("farObserverGainRate", 0.375);
     }
 
     @Override
     public double highValueDrainRate() {
-        return FabricObserved.config.observedOptions.highValueDrainRate;
+        return FabricObserved.CONFIG.getOrDefault("highValueDrainRate", 0.35);
     }
 
     @Override
     public double mediumValueDrainRate() {
-        return FabricObserved.config.observedOptions.mediumValueDrainRate;
+        return FabricObserved.CONFIG.getOrDefault("mediumValueDrainRate", 0.2);
     }
 
     @Override
     public double lowValueDrainRate() {
-        return FabricObserved.config.observedOptions.lowValueDrainRate;
+        return FabricObserved.CONFIG.getOrDefault("lowValueDrainRate", 0.1);
     }
 
     @Override
     public int getWallVisionLevel() {
-        return FabricObserved.config.observedOptions.wallVisionLevel;
+        return FabricObserved.CONFIG.getOrDefault("wallVisionLevel", 0);
     }
 
     @Override
     public int getWallVisionRange() {
-        return FabricObserved.config.observedOptions.wallVisionRange;
+        return FabricObserved.CONFIG.getOrDefault("wallVisionRange", 16);
     }
 
     @Override

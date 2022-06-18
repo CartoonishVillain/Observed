@@ -16,12 +16,11 @@ import java.util.function.Predicate;
 
 public class SpawnSystem {
 
-    private static final ObservedConfig config = FabricObserved.config;
 
     public static void initSpawns(){
         Predicate<BiomeSelectionContext> spawnPredicate = overWorldNoGoZones();
-        BiomeModifications.addSpawn(spawnPredicate, MobCategory.MONSTER, Register.OBSERVERENTITY, config.observedOptions.observerSpawnWeight, 1, 1);
-        if(!config.observedOptions.observersSpawnInCaves)
+        BiomeModifications.addSpawn(spawnPredicate, MobCategory.MONSTER, Register.OBSERVERENTITY, FabricObserved.CONFIG.getOrDefault("observerSpawnWeight", 15), 1, 1);
+        if(!FabricObserved.CONFIG.getOrDefault("observersSpawnInCaves", false))
             SpawnRestrictionAccessor.callRegister(Register.OBSERVERENTITY, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ComponentTicker::spawnRules);
         else
             SpawnRestrictionAccessor.callRegister(Register.OBSERVERENTITY, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,  Monster::checkMonsterSpawnRules);
