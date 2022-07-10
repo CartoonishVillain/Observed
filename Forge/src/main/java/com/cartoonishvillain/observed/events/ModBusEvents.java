@@ -38,10 +38,7 @@ public class ModBusEvents {
     public static void effect(RegisterEvent event) {
         ObserverSpawnEgg.initSpawnEggs();
         event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> {
-            if(ForgeObserved.config.CAVEOBSERVERS.get()) {
-                SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::caveSpawnRules);
-            } else
-                SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::spawnRules);
+            SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::caveSpawnRules);
         });
     }
 

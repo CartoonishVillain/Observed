@@ -103,8 +103,8 @@ dependencies {
     compileOnly project(":Common")
     annotationProcessor 'org.spongepowered:mixin:0.8.4-SNAPSHOT:processor'
 
-    implementation fg.deobf("curse.maven:immortuoscalyx-411857:3828151")
-//    compileOnly fg.deobf("curse.maven:immortuoscalyx-411857:3828151")
+    implementation fg.deobf("curse.maven:immortuoscalyx-411857:3858003")
+//    compileOnly fg.deobf("curse.maven:immortuoscalyx-411857:3858003")
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curiosVersion}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curiosVersion}:api")

@@ -46,11 +46,11 @@ public class Spawns {
 //
 //    }
 
-    public static boolean spawnRules(EntityType<? extends Monster> p_21401_, LevelAccessor p_21402_, MobSpawnType p_21403_, BlockPos p_21404_, RandomSource p_21405_){
-        return p_21402_.canSeeSky(p_21404_) && Monster.checkMonsterSpawnRules(p_21401_, (ServerLevelAccessor) p_21402_, p_21403_, p_21404_, p_21405_) && !p_21402_.getBiome(p_21404_).is(ModdedBiomeTags.MushroomBiomes);
-    }
-
     public static boolean caveSpawnRules(EntityType<? extends Monster> p_21401_, LevelAccessor p_21402_, MobSpawnType p_21403_, BlockPos p_21404_, RandomSource p_21405_){
-        return Monster.checkMonsterSpawnRules(p_21401_, (ServerLevelAccessor) p_21402_, p_21403_, p_21404_, p_21405_) && !p_21402_.getBiome(p_21404_).is(ModdedBiomeTags.MushroomBiomes);
+        if(ForgeObserved.config.CAVEOBSERVERS.get()) {
+            return Monster.checkMonsterSpawnRules(p_21401_, (ServerLevelAccessor) p_21402_, p_21403_, p_21404_, p_21405_) && !p_21402_.getBiome(p_21404_).is(ModdedBiomeTags.MushroomBiomes);
+        } else {
+            return p_21402_.canSeeSky(p_21404_) && Monster.checkMonsterSpawnRules(p_21401_, (ServerLevelAccessor) p_21402_, p_21403_, p_21404_, p_21405_) && !p_21402_.getBiome(p_21404_).is(ModdedBiomeTags.MushroomBiomes);
+        }
     }
 }

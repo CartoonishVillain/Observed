@@ -28,21 +28,21 @@ public class ForgeObserved {
     static DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister
             .create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, Constants.MOD_ID);
 
-    public static RegistryObject<Codec<com.cartoonishvillain.immortuoscalyx.Spawns.SpawnModifiers>> SPAWNCODEC = serializers.register("spawnmodifiers", () ->
+    public static RegistryObject<Codec<Spawns.SpawnModifiers>> SPAWNCODEC = serializers.register("spawnmodifiers", () ->
             RecordCodecBuilder.create(builder -> builder.group(
                     // declare fields
-                    Biome.LIST_CODEC.fieldOf("biomes").forGetter(com.cartoonishvillain.immortuoscalyx.Spawns.SpawnModifiers::biomes),
-                    MobSpawnSettings.SpawnerData.CODEC.fieldOf("spawn").forGetter(com.cartoonishvillain.immortuoscalyx.Spawns.SpawnModifiers::spawn)
+                    Biome.LIST_CODEC.fieldOf("biomes").forGetter(Spawns.SpawnModifiers::biomes),
+                    MobSpawnSettings.SpawnerData.CODEC.fieldOf("spawn").forGetter(Spawns.SpawnModifiers::spawn)
                     // declare constructor
-            ).apply(builder, com.cartoonishvillain.immortuoscalyx.Spawns.SpawnModifiers::new)));
+            ).apply(builder, Spawns.SpawnModifiers::new)));
     
     public ForgeObserved() {
+        ObservedCommon.init();
+        config = ConfigHelper.register(ModConfig.Type.COMMON, CommonConfig::new);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         serializers.register(modEventBus);
         ObserveEffect.init();
         Register.init();
-        ObservedCommon.init();
-        config = ConfigHelper.register(ModConfig.Type.COMMON, CommonConfig::new);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
