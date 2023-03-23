@@ -15,6 +15,6 @@ public class Lenses extends Item implements ICurioItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         ICurioItem.super.curioTick(slotContext, stack);
-        slotContext.entity().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 12*20, 0));
+        slotContext.entity().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 12*20, 0, true, false));
     }
 }

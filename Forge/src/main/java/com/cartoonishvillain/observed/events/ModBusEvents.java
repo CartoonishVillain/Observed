@@ -6,10 +6,13 @@ import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -20,6 +23,8 @@ import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
+
+import static com.cartoonishvillain.observed.Register.*;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEvents {
@@ -36,7 +41,6 @@ public class ModBusEvents {
 
     @SubscribeEvent
     public static void effect(RegisterEvent event) {
-        ObserverSpawnEgg.initSpawnEggs();
         event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> {
             SpawnPlacements.register(Register.OBSERVER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Spawns::caveSpawnRules);
         });
@@ -46,5 +50,20 @@ public class ModBusEvents {
     public static void CapabilityRegister(final RegisterCapabilitiesEvent event){
         event.register(IPlayerCapability.class);
         PlayerCapability.INSTANCE = CapabilityManager.get(new CapabilityToken<IPlayerCapability>() {});
+    }
+
+    @SubscribeEvent
+    public static void registerTabs(CreativeModeTabEvent.BuildContents buildContents) {
+        if (buildContents.getTab() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            buildContents.accept(OBSERVEREYE);
+        }
+
+        if (buildContents.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            buildContents.accept(LENS);
+        }
+
+        if (buildContents.getTab() == CreativeModeTabs.SPAWN_EGGS) {
+            buildContents.accept(OBSERVERSPAWN);
+        }
     }
 }
