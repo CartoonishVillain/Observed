@@ -1,5 +1,6 @@
 package com.cartoonishvillain.observed;
 
+import com.cartoonishvillain.observed.client.ObserverModel;
 import com.cartoonishvillain.observed.client.RenderObserver;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -12,5 +13,10 @@ public class RenderManager {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(Register.OBSERVER.get(), RenderObserver::new);
+    }
+
+    @SubscribeEvent
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ObserverModel.LAYER_LOCATION, ObserverModel::createBodyLayer);
     }
 }

@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class GlowingLayer extends RenderLayer<ObserverEntity, HumanoidModel<ObserverEntity>> {
+public class GlowingLayer extends RenderLayer<ObserverEntity, ObserverModel<ObserverEntity>> {
     protected final static ResourceLocation TEXTURE = new ResourceLocation("observed", "textures/entity/eyelayer.png");
 
-    public GlowingLayer(RenderLayerParent<ObserverEntity, HumanoidModel<ObserverEntity>> entityRendererIn) {
+    public GlowingLayer(RenderLayerParent<ObserverEntity, ObserverModel<ObserverEntity>> entityRendererIn) {
         super(entityRendererIn);
     }
 

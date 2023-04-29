@@ -30,14 +30,14 @@ public class Register {
 
     public static final RegistryObject<Item> OBSERVEREYE = ITEMS.register("observereye", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(1f).effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 20*90, 0), 1).meat().build())));
 
-    public static final RegistryObject<EntityType<ObserverEntity>> OBSERVER = ENTITY_TYPES.register("observer", () -> EntityType.Builder.of(ObserverEntity::new, MobCategory.MONSTER).sized(0.6f, 1.95f).build(new ResourceLocation(Constants.MOD_ID, "observer").toString()));
+    public static final RegistryObject<EntityType<ObserverEntity>> OBSERVER = ENTITY_TYPES.register("observer", () -> EntityType.Builder.of(ObserverEntity::new, MobCategory.MONSTER).sized(0.9f, 1.5f).build(new ResourceLocation(Constants.MOD_ID, "observer").toString()));
 
     public static final RegistryObject<SoundEvent> OBSERVERATTACK = SOUND_EVENT.register("attack_sounds", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Constants.MOD_ID, "attack_sounds")));
     public static final RegistryObject<SoundEvent> OBSERVERHURT = SOUND_EVENT.register("hurt_sounds", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Constants.MOD_ID, "hurt_sounds")));
     public static final RegistryObject<SoundEvent> OBSERVERDEATH = SOUND_EVENT.register("death_sounds", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Constants.MOD_ID, "death_sounds")));
 
 
-    public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ForgeSpawnEggItem(Register.OBSERVER, 2097152, 10131200, new Item.Properties()));
+    public static final RegistryObject<Item> OBSERVERSPAWN = ITEMS.register("observer_spawn_egg", () -> new ForgeSpawnEggItem(Register.OBSERVER, 1512980, 6624788, new Item.Properties()));
 
     public static final RegistryObject<Item> LENS = ITEMS.register("observer_lenses", () -> new Lenses(new Item.Properties().stacksTo(1)));
 
