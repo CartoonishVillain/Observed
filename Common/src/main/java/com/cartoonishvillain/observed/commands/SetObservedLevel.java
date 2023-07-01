@@ -28,7 +28,7 @@ public class SetObservedLevel {
             ServerPlayer serverPlayerEntity = source.getServer().getPlayerList().getPlayer(gameProfile.getId());
             Services.PLATFORM.setValue(serverPlayerEntity, level);
         }
-        source.sendSuccess(Component.translatable("command.observed.success", level), false);
+        source.sendSuccess(() -> Component.translatable("command.observed.success", level), false);
         return 0;
     }
 }

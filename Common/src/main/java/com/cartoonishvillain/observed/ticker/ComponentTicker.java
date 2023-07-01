@@ -20,7 +20,7 @@ import java.util.Random;
 public class ComponentTicker {
     public static void tickObservation(ServerPlayer player){
         float observe = (float) Services.PLATFORM.getValue(player);
-        if(!player.level.isClientSide && player.tickCount % 20 == 0){
+        if(!player.level().isClientSide && player.tickCount % 20 == 0){
 
             if(Services.PLATFORM.isDevelopmentEnvironment() && player.isCrouching()) {
                 player.sendSystemMessage(Component.literal("Observed Level: " + Services.PLATFORM.getValue(player)));

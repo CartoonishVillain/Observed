@@ -5,14 +5,12 @@ import com.cartoonishvillain.observed.capabilities.IPlayerCapability;
 import com.cartoonishvillain.observed.capabilities.PlayerCapability;
 import com.cartoonishvillain.observed.entity.ObserverEntity;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -53,16 +51,16 @@ public class ModBusEvents {
     }
 
     @SubscribeEvent
-    public static void registerTabs(CreativeModeTabEvent.BuildContents buildContents) {
-        if (buildContents.getTab() == CreativeModeTabs.FOOD_AND_DRINKS) {
+    public static void registerTabs(BuildCreativeModeTabContentsEvent buildContents) {
+        if (buildContents.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             buildContents.accept(OBSERVEREYE);
         }
 
-        if (buildContents.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+        if (buildContents.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             buildContents.accept(LENS);
         }
 
-        if (buildContents.getTab() == CreativeModeTabs.SPAWN_EGGS) {
+        if (buildContents.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             buildContents.accept(OBSERVERSPAWN);
         }
     }

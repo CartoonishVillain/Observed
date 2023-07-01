@@ -95,8 +95,8 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
     }
 
     private void affectPlayer(Player player){
-        if(!player.level.isClientSide){
-            ArrayList<Player> players = (ArrayList<Player>) player.level.getEntitiesOfClass(Player.class, player.getBoundingBox().inflate(5));
+        if(!player.level().isClientSide){
+            ArrayList<Player> players = (ArrayList<Player>) player.level().getEntitiesOfClass(Player.class, player.getBoundingBox().inflate(5));
             players.remove(player);
 
             float distance = this.distanceTo(player);
@@ -135,7 +135,7 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
                 }
                 protectedByCalyx.set(false);
             }
-            player.level.playSound(null, getOnPos(), Services.PLATFORM.getObserverAttackSound(), SoundSource.HOSTILE, 1, 1);
+            player.level().playSound(null, getOnPos(), Services.PLATFORM.getObserverAttackSound(), SoundSource.HOSTILE, 1, 1);
 
         }
     }
@@ -153,14 +153,14 @@ public class ObserverEntity extends Monster implements RangedAttackMob {
     @Override
     public boolean hurt(DamageSource p_21016_, float p_21017_) {
 
-        if(!this.level.isClientSide() && PanicTicks < 20) {
-            AreaEffectCloud areaEffectCloud = new AreaEffectCloud(EntityType.AREA_EFFECT_CLOUD, this.level);
+        if(!this.level().isClientSide() && PanicTicks < 20) {
+            AreaEffectCloud areaEffectCloud = new AreaEffectCloud(EntityType.AREA_EFFECT_CLOUD, this.level());
             areaEffectCloud.setPotion(Potions.STRONG_POISON);
             areaEffectCloud.setDuration(80);
             areaEffectCloud.setRadius(3);
             areaEffectCloud.setRadiusPerTick(0.05f);
             areaEffectCloud.moveTo(this.getX(), this.getY(), this.getZ());
-            this.level.addFreshEntity(areaEffectCloud);
+            this.level().addFreshEntity(areaEffectCloud);
         }
         PanicTicks = 100;
         return super.hurt(p_21016_, p_21017_);
